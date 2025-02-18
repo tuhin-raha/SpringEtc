@@ -33,4 +33,12 @@ public class EmployeeDetailServiceImpl implements DetailService {
     public Employee createDetails(Employee newEmployee) {
         return userDao.save(newEmployee);
     }
+
+    @Transactional
+    @Override
+    public String deleteDetails(Integer employeeToBeDeleted) {
+        Employee toBeDeleted = userDao.findById(String.valueOf(employeeToBeDeleted)).get();
+        userDao.delete(toBeDeleted);
+        return "employee has been deleted";
+    }
 }

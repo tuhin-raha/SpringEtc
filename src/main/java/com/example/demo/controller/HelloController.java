@@ -36,6 +36,11 @@ public class HelloController {
         return detailService.createDetails(newEmployee);
     }
 
+    @DeleteMapping ("/employees/{employeeId}")
+    public String deleteEmployee(@PathVariable Integer employeeId){
+        return detailService.deleteDetails(employeeId);
+    }
+
 /*    @GetMapping("/employees")
     public String getEmployeeWithQueryParam(@RequestParam(required = false) String name){ return "Query Param Employee Returned" + name;}
 

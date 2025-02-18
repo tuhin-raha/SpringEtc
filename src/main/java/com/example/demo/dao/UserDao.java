@@ -12,4 +12,6 @@ public interface UserDao {
     Optional<Employee> findById(String id);
 
     Employee save(Employee newEmployee);
+
+    void delete(Employee toBeDeletedEmployee);
 }
