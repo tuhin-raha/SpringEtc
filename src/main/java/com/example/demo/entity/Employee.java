@@ -1,9 +1,6 @@
 package com.example.demo.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.util.Objects;
 
@@ -12,6 +9,7 @@ import java.util.Objects;
 public class Employee{
     @Id
     @Column(name="idEmployee")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer id;
     @Column(name="name")
     private  String name;

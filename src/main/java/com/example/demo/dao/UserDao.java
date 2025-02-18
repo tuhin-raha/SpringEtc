@@ -10,4 +10,6 @@ public interface UserDao {
     //Optional<Employee> getDetails(String id);
 
     Optional<Employee> findById(String id);
+
+    Employee save(Employee newEmployee);
 }

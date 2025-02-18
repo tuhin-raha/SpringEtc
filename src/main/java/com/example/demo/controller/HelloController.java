@@ -5,8 +5,6 @@ import com.example.demo.service.DetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
-
 @RestController
 @RequestMapping("/v1/api")
 public class HelloController {
@@ -31,6 +29,11 @@ public class HelloController {
         //return new ResponseEntity<Employee>(detailService.getDetailsById(id), HttpStatus.OK);
         return detailService.getDetailsById(id);
 
+    }
+
+    @PostMapping("/employees")
+    public Employee createEmployee(@RequestBody Employee newEmployee){
+        return detailService.createDetails(newEmployee);
     }
 
 /*    @GetMapping("/employees")
