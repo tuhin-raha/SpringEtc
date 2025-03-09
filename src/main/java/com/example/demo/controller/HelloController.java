@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.Employee;
 import com.example.demo.service.DetailService;
+import com.example.demo.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,10 +11,12 @@ import org.springframework.web.bind.annotation.*;
 public class HelloController {
 
     private DetailService detailService;
+    private MessageService messageService;
 
     @Autowired
-    public HelloController(DetailService detailService) {
+    public HelloController(DetailService detailService, MessageService messageService) {
         this.detailService = detailService;
+        this.messageService = messageService;
     }
     /*@GetMapping("/hello")
     public String sayHello() {
@@ -39,6 +42,16 @@ public class HelloController {
     @DeleteMapping ("/employees/{employeeId}")
     public String deleteEmployee(@PathVariable Integer employeeId){
         return detailService.deleteDetails(employeeId);
+    }
+
+    @PutMapping ("/employees")
+    public String modifyEmployee(@RequestBody Employee employeeToBeModified){
+        return detailService.modifyDetails(employeeToBeModified);
+    }
+    
+    @PostMapping("/basicMessages/{message}")
+    public String sendABasicMessage(@PathVariable String message){
+        return messageService.sendMessage(message);
     }
 
 /*    @GetMapping("/employees")

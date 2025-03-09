@@ -9,4 +9,6 @@ public interface DetailService {
     public Employee createDetails(Employee newEmployee);
 
     public String deleteDetails(Integer toBeDeleted);
+
+    public String modifyDetails(Employee employeeToBeModified);
 }

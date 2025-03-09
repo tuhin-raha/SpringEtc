@@ -5,6 +5,6 @@ import com.example.demo.entity.Employee;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-/*@Primary
+@Primary
 public interface EmployeeSpringDataJpaImpl extends JpaRepository<Employee, String>,UserDao {
-}*/
+}

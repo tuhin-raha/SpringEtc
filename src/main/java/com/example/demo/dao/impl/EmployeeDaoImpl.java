@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
-@Repository
+//@Repository
 public class EmployeeDaoImpl implements UserDao {
     @Autowired
     private EntityManager dbEntityManager;
@@ -29,5 +29,9 @@ public class EmployeeDaoImpl implements UserDao {
     @Override
     public void delete(Employee employee) {
         dbEntityManager.remove(employee);
+    }
+
+    public void merge(Employee toBeModified) {
+        dbEntityManager.merge(toBeModified);
     }
 }

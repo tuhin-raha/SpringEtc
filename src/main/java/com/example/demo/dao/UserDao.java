@@ -14,4 +14,6 @@ public interface UserDao {
     Employee save(Employee newEmployee);
 
     void delete(Employee toBeDeletedEmployee);
+
+    //void merge(Employee );
 }
