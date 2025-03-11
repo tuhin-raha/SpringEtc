@@ -15,12 +15,14 @@ public class Employee{
     private  String name;
     @Column(name="roles")
     private String role;
+    @OneToOne (mappedBy = "employee", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private EmployeeProfile profileOfEmployee;
 
-    public Employee(Integer id, String name, String role) {
+/*    public Employee(Integer id, String name, String role) {
         this.id = id;
         this.name = name;
         this.role = role;
-    }
+    }*/
 
     public Employee() {
     }
@@ -52,14 +54,13 @@ public class Employee{
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Employee employee = (Employee) o;
-        return Objects.equals(getId(), employee.getId()) && Objects.equals(getName(), employee.getName()) && Objects.equals(getRoles(), employee.getRoles());
+        if (!(o instanceof Employee employee)) return false;
+        return Objects.equals(getId(), employee.getId()) && Objects.equals(getName(), employee.getName()) && Objects.equals(role, employee.role) && Objects.equals(profileOfEmployee, employee.profileOfEmployee);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getName(), getRoles());
+        return Objects.hash(getId(), getName(), role, profileOfEmployee);
     }
 
     @Override
