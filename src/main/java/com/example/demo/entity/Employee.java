@@ -2,6 +2,8 @@ package com.example.demo.entity;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -13,16 +15,25 @@ public class Employee{
     public Integer id;
     @Column(name="name")
     private  String name;
-    @Column(name="roles")
+    @Column(name="role")
     private String role;
-    @OneToOne (mappedBy = "employee", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+
+    @OneToOne (mappedBy = "employee", cascade = CascadeType.ALL)
     private EmployeeProfile profileOfEmployee;
 
-/*    public Employee(Integer id, String name, String role) {
-        this.id = id;
-        this.name = name;
-        this.role = role;
-    }*/
+    @OneToMany (mappedBy = "employee", cascade = CascadeType.ALL)
+    private List<Project> projects;
+
+    public List<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(List<Project> projects) {
+        this.projects = projects;
+        if(projects != null){
+            projects.forEach(x-> x.setEmployee(this));
+        }
+    }
 
     public Employee() {
     }
@@ -43,24 +54,35 @@ public class Employee{
         this.name = name;
     }
 
-    public String getRoles() {
+    public String getRole() {
         return role;
     }
 
-    public void setRoles(String role) {
+    public void setRole(String role) {
         this.role = role;
+    }
+
+    public EmployeeProfile getProfileOfEmployee() {
+        return profileOfEmployee;
+    }
+
+    public void setProfileOfEmployee(EmployeeProfile profileOfEmployee) {
+        this.profileOfEmployee = profileOfEmployee;
+        if(profileOfEmployee != null){
+            profileOfEmployee.setEmployee(this);
+        }
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Employee employee)) return false;
-        return Objects.equals(getId(), employee.getId()) && Objects.equals(getName(), employee.getName()) && Objects.equals(role, employee.role) && Objects.equals(profileOfEmployee, employee.profileOfEmployee);
+        return Objects.equals(getId(), employee.getId()) && Objects.equals(getName(), employee.getName()) && Objects.equals(getRole(), employee.getRole());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getName(), role, profileOfEmployee);
+        return Objects.hash(getId(), getName(), getRole());
     }
 
     @Override

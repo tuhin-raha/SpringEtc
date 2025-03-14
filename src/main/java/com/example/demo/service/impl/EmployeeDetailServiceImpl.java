@@ -1,6 +1,6 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.dao.UserDao;
+import com.example.demo.dao.impl.EmployeeSpringDataJpaImpl;
 import com.example.demo.entity.Employee;
 import com.example.demo.service.DetailService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,43 +12,39 @@ import java.util.Optional;
 @Service
 public class EmployeeDetailServiceImpl implements DetailService {
 
-    private final UserDao userDao;
+    private final EmployeeSpringDataJpaImpl employeeSpringDataJpa;
 
     @Autowired
-    public EmployeeDetailServiceImpl(UserDao userDao) {
-        this.userDao = userDao;
+    public EmployeeDetailServiceImpl(EmployeeSpringDataJpaImpl employeeSpringDataJpa) {
+        this.employeeSpringDataJpa = employeeSpringDataJpa;
     }
 
     @Override
-    public Employee getDetailsById(String id) {
-        // return Optional<Employee>
-        // return userDao.getDetails(id);
-        Optional<Employee> details = userDao.findById(id);
+    public Employee getDetailsById(Integer id) {
+        Optional<Employee> details = employeeSpringDataJpa.findById(id);
         return details.get();
-
     }
 
     @Transactional
     @Override
     public Employee createDetails(Employee newEmployee) {
-        return userDao.save(newEmployee);
+        return employeeSpringDataJpa.saveAndFlush(newEmployee);
     }
 
     @Transactional
     @Override
     public String deleteDetails(Integer employeeToBeDeleted) {
-        Employee toBeDeleted = userDao.findById(String.valueOf(employeeToBeDeleted)).get();
-        userDao.delete(toBeDeleted);
+        employeeSpringDataJpa.deleteById(employeeToBeDeleted);
         return "employee has been deleted";
     }
 
     @Transactional
     @Override
     public String modifyDetails(Employee employeeToBeModified) {
-        Employee toBeModified = userDao.findById(String.valueOf(employeeToBeModified.getId())).get();
+        Employee toBeModified = employeeSpringDataJpa.findById(employeeToBeModified.getId()).get();
         toBeModified.setName(employeeToBeModified.getName());
-        toBeModified.setRoles(employeeToBeModified.getRoles());
-        userDao.save(toBeModified);
+        toBeModified.setRole(employeeToBeModified.getRole());
+        employeeSpringDataJpa.save(toBeModified);
         return "details have been modified";
     }
 }

@@ -15,24 +15,15 @@ public class HelloController {
     public HelloController(DetailService detailService) {
         this.detailService = detailService;
     }
-    /*@GetMapping("/hello")
-    public String sayHello() {
-        return "Hello, World!";
-    }*/
-
-    /*@GetMapping("/employees")
-    public String getAllEmployees(){ return "All Employees Returned";}*/
-
 
     @GetMapping("/employees/{id}")
-    public Employee getEmployeeWithPathParam(@PathVariable String id){
-        //return new ResponseEntity<Employee>(detailService.getDetailsById(id), HttpStatus.OK);
+    public Employee getEmployeeWithPathParam(@PathVariable Integer id){
         return detailService.getDetailsById(id);
-
     }
 
     @PostMapping("/employees")
     public Employee createEmployee(@RequestBody Employee newEmployee){
+        System.out.println(newEmployee.toString() + newEmployee.getProfileOfEmployee().toString() + newEmployee.getProjects().toString());
         return detailService.createDetails(newEmployee);
     }
 
@@ -45,15 +36,5 @@ public class HelloController {
     public String modifyEmployee(@RequestBody Employee employeeToBeModified){
         return detailService.modifyDetails(employeeToBeModified);
     }
-
-/*    @GetMapping("/employees")
-    public String getEmployeeWithQueryParam(@RequestParam(required = false) String name){ return "Query Param Employee Returned" + name;}
-
-    @PostMapping("/employees")
-    public String postEmployeeWithRequestBody(@RequestBody String name){ return "Request Param Employee Returned" + name;}
-
-    @PostMapping("/employeesHeader")
-    public String postEmployeeWithHeader(@RequestHeader Map<String, String> headers, @RequestHeader String name){ return "Header Employee Returned " + name + headers;}*/
-
 
 }
