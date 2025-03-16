@@ -18,11 +18,17 @@ public class Employee{
     @Column(name="role")
     private String role;
 
-    @OneToOne (mappedBy = "employee", cascade = CascadeType.ALL)
+    @OneToOne (mappedBy = "employee", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private EmployeeProfile profileOfEmployee;
 
-    @OneToMany (mappedBy = "employee", cascade = CascadeType.ALL)
+    @OneToMany (mappedBy = "employee", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Project> projects;
+
+    public Employee(Integer id, String name, String role) {
+        this.id = id;
+        this.name = name;
+        this.role = role;
+    }
 
     public List<Project> getProjects() {
         return projects;

@@ -1,0 +1,56 @@
+# General
+*.class
+*.log
+*.jar
+*.war
+*.ear
+*.swp
+*.DS_Store
+*.iml
+*.iws
+
+# IntelliJ IDEA specific
+.idea/
+*.iml
+*.ipr
+*.iws
+out/
+
+# Eclipse specific
+.project
+.classpath
+.settings/
+.apt_generated/
+.factorypath/
+bin/
+
+# Maven specific
+target/
+dependency-reduced-pom.xml
+build/
+
+# Logs
+logs/
+*.log
+
+# Spring Boot specific
+.env
+*.properties
+*.yml
+spring.log
+
+# Test results
+surefire-reports/
+test-output/
+
+# OS specific
+Thumbs.db
+.DS_Store
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+
+# IDE directories
+.vscode/

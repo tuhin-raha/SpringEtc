@@ -2,12 +2,14 @@ package com.example.demo.service.impl;
 
 import com.example.demo.dao.impl.EmployeeSpringDataJpaImpl;
 import com.example.demo.entity.Employee;
+import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.service.DetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
+import java.util.function.Supplier;
 
 @Service
 public class EmployeeDetailServiceImpl implements DetailService {
@@ -22,7 +24,8 @@ public class EmployeeDetailServiceImpl implements DetailService {
     @Override
     public Employee getDetailsById(Integer id) {
         Optional<Employee> details = employeeSpringDataJpa.findById(id);
-        return details.get();
+        Employee nothingFound = details.orElseThrow(() -> new ResourceNotFoundException("nothing found"));
+        return nothingFound;
     }
 
     @Transactional

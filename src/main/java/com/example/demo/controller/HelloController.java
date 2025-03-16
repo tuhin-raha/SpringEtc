@@ -2,22 +2,31 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.Employee;
 import com.example.demo.service.DetailService;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/v1/api")
+@Validated
 public class HelloController {
 
-    private DetailService detailService;
+    private final DetailService detailService;
 
     @Autowired
     public HelloController(DetailService detailService) {
         this.detailService = detailService;
     }
 
+    @GetMapping("/test")
+    public String testMethod(@RequestParam @Positive String id){
+        return id;
+    }
+
     @GetMapping("/employees/{id}")
-    public Employee getEmployeeWithPathParam(@PathVariable Integer id){
+    public Employee getEmployeeWithPathParam(@PathVariable @Positive Integer id){
         return detailService.getDetailsById(id);
     }
 
