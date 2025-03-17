@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-config
+data:
+  MYSQL_HOST: "192.168.68.113"  # Replace with actual MySQL hostname/IP
+  MYSQL_PORT: "3306"
+  MYSQL_DATABASE: "springbootschema"
